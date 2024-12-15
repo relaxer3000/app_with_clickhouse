@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+
+  app:
+    build: .
+    image: app_img:latest
+    networks:
+      - mynetwork
+    ports:
+      - "5001:5000"
+    depends_on:
+      - rabbitmq
+      - clickhouse
+
+
+  consumer:
+    build: .
+    image: app_img:latest
+    networks:
+      - mynetwork
+    command: ["faststream", "run", "rabbit.consumer:app"]
+    depends_on:
+      - rabbitmq
+      - clickhouse
+
+
+  rabbitmq:
+    image: rabbitmq:latest
+    networks:
+      - mynetwork
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+
+  clickhouse:
+    image: yandex/clickhouse-server:latest
+    networks:
+      - mynetwork
+    ports:
+      - "8123:8123"
+
+networks:
+  mynetwork:
+    driver: bridge

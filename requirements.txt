@@ -1,0 +1,8 @@
+fastapi==0.115.6
+uvicorn==0.32.1
+faststream[rabbit]==0.5.33
+faststream[cli]==0.5.33
+pydantic-settings==2.6.1
+clickhouse-connect==0.8.9
+sqlalchemy==2.0.36
+clickhouse_sqlalchemy==0.3.2
