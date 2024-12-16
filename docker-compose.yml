@@ -19,7 +19,6 @@ services:
     image: app_img:latest
     networks:
       - mynetwork
-    command: ["faststream", "run", "rabbit.consumer:app"]
     depends_on:
       - rabbitmq
       - clickhouse
